@@ -1,4 +1,6 @@
-![Greetings](https://media.tenor.com/hVRhFeDFW6oAAAAi/anime-wave.gif)
+<div align="center">
+  <img src="https://media.tenor.com/hVRhFeDFW6oAAAAi/anime-wave.gif" alt="Greetings">
+</div>
 
 # Web Coding Challenges
 
