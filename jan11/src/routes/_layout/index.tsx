@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_layout/")({
   beforeLoad: () => {
     const user = useUserStore.getState().user;
 
-    if (user) {
+    if (!user) {
       redirect({
         to: "/login",
         throw: true,

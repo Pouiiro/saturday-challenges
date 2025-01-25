@@ -1,3 +1,4 @@
+import { useUserStore } from "@/stores/user";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
@@ -12,14 +13,16 @@ function RouteComponent() {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const auth = getAuth();
+  const login = useUserStore((state) => state.login);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null); // Reset error
+    setError(null);
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      navigate({ to: "/" }); // Redirect after successful signup
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+      login(user);
+      navigate({ to: "/" });
     } catch (err: any) {
       setError(err.message);
     }

@@ -1,26 +1,16 @@
 import { create } from "zustand";
-import { User } from "firebase/auth";
+import { UserCredential } from "firebase/auth";
 
 type UserStore = {
-  user?: User;
-  token?: string;
-  authed: boolean;
-  checkAuthStatus: (user: User) => boolean;
-  login: (user: User) => "success" | "failure";
-  logout: (user: User) => "success" | "failure";
+  user?: UserCredential;
+  login: (user: UserCredential) => void;
+  logout: () => void;
 };
 
 export const useUserStore = create<UserStore>((set, get) => ({
   user: undefined,
-  token: undefined,
-  authed: false,
-  checkAuthStatus: (user) => {
-    return true;
-  },
   login: (user) => {
-    return "success";
+    set({ user });
   },
-  logout: (user) => {
-    return "failure";
-  },
+  logout: () => set({ user: undefined }),
 }));
